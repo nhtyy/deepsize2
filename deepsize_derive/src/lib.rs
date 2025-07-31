@@ -30,8 +30,8 @@ pub fn derive_deep_size(input: proc_macro::TokenStream) -> proc_macro::TokenStre
 
     let expanded = quote! {
         // The generated impl.
-        impl #impl_generics ::deepsize::DeepSizeOf for #name #ty_generics #where_clause {
-            fn deep_size_of_children(&self, context: &mut ::deepsize::Context) -> usize {
+        impl #impl_generics ::deepsize2::DeepSizeOf for #name #ty_generics #where_clause {
+            fn deep_size_of_children(&self, context: &mut ::deepsize2::Context) -> usize {
                 #sum
             }
         }
@@ -45,7 +45,7 @@ pub fn derive_deep_size(input: proc_macro::TokenStream) -> proc_macro::TokenStre
 fn add_trait_bounds(mut generics: Generics) -> Generics {
     for param in &mut generics.params {
         if let GenericParam::Type(ref mut type_param) = *param {
-            type_param.bounds.push(parse_quote!(::deepsize::DeepSizeOf));
+            type_param.bounds.push(parse_quote!(::deepsize2::DeepSizeOf));
         }
     }
     generics
@@ -57,7 +57,7 @@ fn match_fields(fields: &syn::Fields) -> TokenStream {
             let recurse = fields.named.iter().map(|f| {
                 let name = &f.ident;
                 quote_spanned! {f.span()=>
-                    ::deepsize::DeepSizeOf::deep_size_of_children(&self.#name, context)
+                    ::deepsize2::DeepSizeOf::deep_size_of_children(&self.#name, context)
                 }
             });
             quote! {
@@ -68,7 +68,7 @@ fn match_fields(fields: &syn::Fields) -> TokenStream {
             let recurse = fields.unnamed.iter().enumerate().map(|(i, f)| {
                 let index = Index::from(i);
                 quote_spanned! {f.span()=>
-                    ::deepsize::DeepSizeOf::deep_size_of_children(&self.#index, context)
+                    ::deepsize2::DeepSizeOf::deep_size_of_children(&self.#index, context)
                 }
             });
             quote! {
@@ -88,7 +88,7 @@ fn match_enum_fields(fields: &syn::Fields) -> TokenStream {
             let recurse = fields.named.iter().map(|f| {
                 let name = &f.ident;
                 quote_spanned! {f.span()=>
-                    ::deepsize::DeepSizeOf::deep_size_of_children(#name, context)
+                    ::deepsize2::DeepSizeOf::deep_size_of_children(#name, context)
                 }
             });
             quote! {
@@ -99,7 +99,7 @@ fn match_enum_fields(fields: &syn::Fields) -> TokenStream {
             let recurse = fields.unnamed.iter().enumerate().map(|(i, f)| {
                 let i = syn::Ident::new(&format!("_{}", i), proc_macro2::Span::call_site());
                 quote_spanned! {f.span()=>
-                    ::deepsize::DeepSizeOf::deep_size_of_children(#i, context)
+                    ::deepsize2::DeepSizeOf::deep_size_of_children(#i, context)
                 }
             });
             quote! {

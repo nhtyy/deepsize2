@@ -1,33 +1,42 @@
 [package]
-name = "deepsize"
-version = "0.2.0"
-authors = ["Aeledfyr <aeledfyr@gmail.com>"]
+name = "deepsize2"
+version = "0.1.0"
+authors = ["Aeledfyr <aeledfyr@gmail.com>", "Nathan <n@push0.dev>"]
 license = "MIT"
 description = "A crate for measuring the total size of object on the stack and heap"
-repository = "https://github.com/Aeledfyr/deepsize/"
+repository = "https://github.com/nhtyy/deepsize/"
 readme = "README.md"
 include = ["Cargo.toml", "src/**/*.rs", "README.md", "LICENSE"]
-edition = "2018"
+edition = "2021"
 keywords = ["size", "stack", "heap"]
 categories = ["development-tools::profiling", "memory-management"]
 
 [dependencies]
-deepsize_derive = { path = "deepsize_derive", version = "0.1.2", optional = true }
-slotmap = { version = "^0.4", optional = true }
-slab = { version = "^0.4", optional = true }
-indexmap = { version = "^1", optional = true }
-arrayvec = { version = "^0.5", optional = true }
-smallvec = { version = "^1", optional = true }
-hashbrown = { version = "^0.9", optional = true }
-chrono = { version = "^0.4", optional = true }
-tokio = { version = "^1.1", optional = true, default-features = false }
-actix = { version = "^0.11.0", optional = true, default-features = false }
+deepsize_derive2 = { path = "deepsize_derive", version = "0.1", optional = true }
+
+# External dependencies
+slotmap = { version = "1.0", optional = true }
+slab = { version = "0.4", optional = true }
+indexmap = { version = "2", optional = true }
+arrayvec = { version = "0.7", optional = true }
+smallvec = { version = "1", optional = true }
+hashbrown = { version = "0.14", optional = true }
+chrono = { version = "0.4", optional = true }
+tokio = { version = "1", optional = true, default-features = false }
+actix = { version = "0.13.0", optional = true, default-features = false }
 
 [dev-dependencies]
-deepsize_derive = { path = "deepsize_derive", version = "0.1.1" }
+deepsize_derive2 = { path = "deepsize_derive", version = "0.1" }
 
 [features]
 default = ["std", "derive"]
-derive = ["deepsize_derive"]
 std = []
-tokio_net = ["tokio", "tokio/net"]
+derive = ["dep:deepsize_derive2"]
+hashbrown = ["dep:hashbrown"]
+indexmap = ["dep:indexmap"]
+smallvec = ["dep:smallvec"]
+arrayvec = ["dep:arrayvec"]
+slab = ["dep:slab"]
+slotmap = ["dep:slotmap"]
+tokio_net = ["dep:tokio", "tokio/net"]
+actix = ["dep:actix"]

@@ -28,22 +28,22 @@ references, and are not counted.
 
 `deepsize` also has optional support for these external crates:
 
-* `slotmap`: (version 0.4)
+* `slotmap`: (version 1.0)
 * `slab`: (version 0.4)
-* `indexmap`: (version 1)
-* `arrayvec`: (version 0.5)
+* `indexmap`: (version 2)
+* `arrayvec`: (version 0.7)
 * `smallvec`: (version 1)
-* `hashbrown`: (version 0.9)
+* `hashbrown`: (version 0.14)
 * `chrono`: (version 0.4)
-* `actix`: (version 0.11)
-* `tokio`: (version 1.1)
+* `tokio`: (version 1)
+* `actix`: (version 0.13)
 
 ## Example Code
 
 ```rust
 use std::mem::size_of;
 
-use deepsize::DeepSizeOf;
+use deepsize2::DeepSizeOf;
 
 #[derive(DeepSizeOf)]
 struct Test {

@@ -68,9 +68,10 @@ fn slices() {
 #[test]
 fn alignment() {
     #[repr(align(256))]
-    struct Test(u8);
+    struct Test(#[allow(unused)] u8);
     known_deep_size!(0; Test);
 
+    #[allow(unused)]
     struct Test2(Test, u8);
     known_deep_size!(0; Test2);
 

@@ -6,7 +6,7 @@ use crate::{Context, DeepSizeOf};
 ///
 /// Usage:
 /// ```rust
-/// # #[macro_use] extern crate deepsize; fn main() {
+/// # #[macro_use] extern crate deepsize2; fn main() {
 /// struct A(u32);
 /// struct B(A, char);
 /// struct C(Box<u32>);

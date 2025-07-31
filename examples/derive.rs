@@ -1,4 +1,4 @@
-use deepsize::DeepSizeOf;
+use deepsize2::DeepSizeOf;
 
 #[derive(DeepSizeOf)]
 struct Test {

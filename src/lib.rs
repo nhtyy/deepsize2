@@ -4,10 +4,10 @@
 //! A utility for recursively measuring the size of an object
 //!
 //! This contains the [`DeepSizeOf`](DeepSizeOf) trait, and re-exports
-//! the `DeepSizeOf` derive macro from [`deepsize_derive`](https://docs.rs/deepsize_derive)
+//! the `DeepSizeOf` derive macro from [`deepsize_derive2`](https://docs.rs/deepsize_derive2)
 //!
 //! ```rust
-//! use deepsize::DeepSizeOf;
+//! use deepsize2::DeepSizeOf;
 //!
 //! #[derive(DeepSizeOf)]
 //! struct Test {
@@ -36,9 +36,9 @@ extern crate alloc;
 extern crate core;
 
 #[cfg(feature = "derive")]
-extern crate self as deepsize;
+extern crate self as deepsize2;
 #[cfg(feature = "derive")]
-pub use deepsize_derive::*;
+pub use deepsize_derive2::*;
 
 use core::mem::{size_of, size_of_val};
 
@@ -62,7 +62,7 @@ pub trait DeepSizeOf {
     /// doesn't account for allocator's overhead.
     ///
     /// ```rust
-    /// use deepsize::DeepSizeOf;
+    /// use deepsize2::DeepSizeOf;
     ///
     /// let mut map: Vec<(Box<u32>, String)> = Vec::new();
     ///
@@ -112,7 +112,7 @@ pub trait DeepSizeOf {
     ///
     /// Here is an example from the implementation of `DeepSizeOf` for `Vec<T>`
     /// ```rust, ignore
-    /// # use deepsize::{DeepSizeOf, Context};
+    /// # use deepsize2::{DeepSizeOf, Context};
     /// impl<T> DeepSizeOf for std::vec::Vec<T> where T: DeepSizeOf {
     ///     fn deep_size_of_children(&self, context: &mut Context) -> usize {
     ///         // Size of heap allocations for each child
@@ -194,7 +194,7 @@ where
     /// the unused capacity.
     ///
     /// ```rust
-    /// use deepsize::DeepSizeOf;
+    /// use deepsize2::DeepSizeOf;
     ///
     /// let mut vec: Vec<u8> = vec![];
     /// for i in 0..13 {
@@ -206,7 +206,7 @@ where
     /// ```
     /// With allocated objects:
     /// ```rust
-    /// use deepsize::DeepSizeOf;
+    /// use deepsize2::DeepSizeOf;
     ///
     /// let mut vec: Vec<Box<u64>> = vec![];
     /// for i in 0..13 {
@@ -234,7 +234,7 @@ where
     /// the unused capacity.
     ///
     /// ```rust
-    /// use deepsize::DeepSizeOf;
+    /// use deepsize2::DeepSizeOf;
     /// use std::collections::VecDeque;
     ///
     /// let mut vec: VecDeque<u8> = VecDeque::new();
@@ -248,7 +248,7 @@ where
     /// ```
     /// With allocated objects:
     /// ```rust
-    /// use deepsize::DeepSizeOf;
+    /// use deepsize2::DeepSizeOf;
     /// use std::collections::VecDeque;
     ///
     /// let mut vec: VecDeque<Box<u64>> = VecDeque::new();
@@ -278,7 +278,7 @@ where
     /// each node is 2 usize (next, prev)
     ///
     /// ```rust
-    /// use deepsize::DeepSizeOf;
+    /// use deepsize2::DeepSizeOf;
     /// use std::collections::LinkedList;
     ///
     /// let mut list: LinkedList<u8> = LinkedList::new();
