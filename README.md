@@ -1,6 +1,6 @@
 
 # deepsize
-![](https://img.shields.io/crates/v/deepsize.svg) [![](https://img.shields.io/badge/docs-deepsize-blue.svg)](https://docs.rs/deepsize)
+![](https://img.shields.io/crates/v/deepsize2.svg) [![](https://img.shields.io/badge/docs-deepsize2-blue.svg)](https://docs.rs/deepsize2)
 
 A trait and derive macro to recursively find the size of an object
 and the size of allocations that it owns.
@@ -61,3 +61,4 @@ fn main() {
 }
 ```
 
+Note: This is an actively maintained fork of the orignal [deepsize](https://docs.rs/deepsize) crate.
